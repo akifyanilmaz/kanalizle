@@ -3,44 +3,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kanal İzle</title>
 <style>
- body{margin:0;background:#111;color:#fff;font-family:sans-serif;padding:28px 40px}
- h1{font-size:34px;margin:0 0 6px} h2{font-size:22px;color:#999;margin:26px 0 10px}
- .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
- a{display:block;padding:26px 10px;text-align:center;font-size:26px;color:#fff;text-decoration:none;background:#25252b;border-radius:12px;border:4px solid transparent}
- a:focus{background:#c0392b;border-color:#fff;outline:none;transform:scale(1.05)}
- p{color:#888;font-size:18px}
+ body{margin:0;background:#0d0d12;color:#fff;font-family:sans-serif;padding:36px 48px 60px}
+ h1{font-size:40px;margin:0 0 4px}
+ .sub{color:#8a8a99;font-size:20px;margin:0 0 8px}
+ h2{font-size:26px;color:#b8b8c8;margin:30px 0 14px}
+ .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+ .card{display:flex;align-items:center;justify-content:center;text-align:center;height:120px;
+   font-size:30px;font-weight:bold;color:#fff;text-decoration:none;border-radius:16px;
+   background:linear-gradient(135deg,var(--c),#1b1b24);border:5px solid transparent;
+   transition:transform .12s}
+ .card:focus{outline:none;border-color:#fff;transform:scale(1.08);box-shadow:0 0 28px rgba(255,255,255,.45)}
 </style></head><body>
 <h1>📺 Kanal İzle</h1>
-<p>Yön tuşlarıyla seç, OK ile aç. Geri tuşu listeye döndürür.</p>
+<p class="sub">Yön tuşlarıyla kanalı seç, OK'a bas. Geri tuşu listeye döndürür.</p>
 <div id="app"></div>
 <script>
-// Kanal eklemek/düzeltmek için bu listeyi değiştir.
+// Kanal eklemek/düzeltmek için bu listeyi değiştir: ['Ad','adres','#renk']
 const CH = {
  'Ulusal': [
-  ['TRT 1','https://www.tabii.com/tr/watch/live/trt1'],
-  ['ATV','https://www.atv.com.tr/canli-yayin'],
-  ['Show TV','https://www.showtv.com.tr/canli-yayin'],
-  ['Kanal D','https://www.kanald.com.tr/canli-yayin'],
-  ['Star TV','https://www.startv.com.tr/canli-yayin'],
-  ['TV8','https://www.tv8.com.tr/canli-yayin'],
-  ['Kanal 7','https://www.kanal7.com/canli-izle']],
+  ['TRT 1','https://www.tabii.com/tr/watch/live/trt1','#b71c1c'],
+  ['ATV','https://www.atv.com.tr/canli-yayin','#c0392b'],
+  ['Show TV','https://www.showtv.com.tr/canli-yayin','#d35400'],
+  ['Kanal D','https://www.kanald.com.tr/canli-yayin','#1565c0'],
+  ['Star TV','https://www.startv.com.tr/canli-yayin','#8e24aa'],
+  ['TV8','https://www.tv8.com.tr/canli-yayin','#00897b'],
+  ['Kanal 7','https://www.kanal7.com/canli-izle','#2e7d32']],
  'Haber': [
-  ['TRT Haber','https://www.trthaber.com/canli-yayin-trt-haber.html'],
-  ['Halk TV','https://halktv.com.tr/canli-yayin'],
-  ['Sözcü TV','https://www.sozcu.com.tr/canli-yayin'],
-  ['Habertürk','https://www.haberturk.com/canliyayin'],
-  ['CNN Türk','https://www.cnnturk.com/canli-yayin'],
-  ['NTV','https://www.ntv.com.tr/canli-yayin/ntv'],
-  ['TV100','https://tv100.com/canli-yayin']],
+  ['TRT Haber','https://www.trthaber.com/canli-yayin-trt-haber.html','#ad1457'],
+  ['Halk TV','https://halktv.com.tr/canli-yayin','#0277bd'],
+  ['Sözcü TV','https://www.sozcu.com.tr/canli-yayin','#283593'],
+  ['Habertürk','https://www.haberturk.com/canliyayin','#6a1b9a'],
+  ['CNN Türk','https://www.cnnturk.com/canli-yayin','#b71c1c'],
+  ['NTV','https://www.ntv.com.tr/canli-yayin/ntv','#00695c'],
+  ['TV100','https://tv100.com/canli-yayin','#4527a0']],
  'Yerel': [
-  // ['Kanal adı','https://canlı-yayın-adresi']
+  // ['Kanal adı','https://canlı-yayın-adresi','#455a64']
  ]
 };
 const app = document.getElementById('app');
 for (const g in CH) {
   if (!CH[g].length) continue;
   app.insertAdjacentHTML('beforeend','<h2>'+g+'</h2><div class="grid">'+
-    CH[g].map(c=>'<a href="'+c[1]+'">'+c[0]+'</a>').join('')+'</div>');
+    CH[g].map(c=>'<a class="card" style="--c:'+(c[2]||'#455a64')+'" href="'+c[1]+'">'+c[0]+'</a>').join('')+'</div>');
 }
 document.querySelector('a').focus();
 </script></body></html>
